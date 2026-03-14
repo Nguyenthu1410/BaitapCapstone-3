@@ -1,6 +1,7 @@
 export const PUBLIC_PATH = {
     HOME: '/trang-chu',
-    SIGN_IN:'/lich-chieu',
+    REGISTER: '/register',
+    SIGN_IN:'/sign-in',
     SCHEDULE: '/lich-chieu',
     CINEMA: '/rap-chieu',
     PROMOTION: '/khuyen-mai',
