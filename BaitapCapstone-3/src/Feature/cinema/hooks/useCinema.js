@@ -5,8 +5,8 @@ export const useCinemaSystem = () => {
   return useQuery({
     queryKey: ['cinemaSystem'],
     queryFn: () => cinemaService.getCinemaSystem().then(res => res.data),
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    gcTime: 1000 * 60 * 10, // 10 minutes
+    staleTime: 1000 * 60 * 5, 
+    gcTime: 1000 * 60 * 10, 
   })
 }
 
@@ -14,8 +14,8 @@ export const useCinemaSchedule = (maNhom = 'GP01') => {
   return useQuery({
     queryKey: ['cinemaSchedule', maNhom],
     queryFn: () => cinemaService.getCinemaSchedule(maNhom).then(res => res.data),
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    gcTime: 1000 * 60 * 10, // 10 minutes
+    staleTime: 1000 * 60 * 5, 
+    gcTime: 1000 * 60 * 10, 
   })
 }
 
@@ -23,9 +23,9 @@ export const useMovieSchedule = (maPhim) => {
   return useQuery({
     queryKey: ['movieSchedule', maPhim],
     queryFn: () => cinemaService.getMovieSchedule(maPhim).then(res => res.data),
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    gcTime: 1000 * 60 * 10, // 10 minutes
-    enabled: !!maPhim, // Only fetch when maPhim is provided
+    staleTime: 1000 * 60 * 5, 
+    gcTime: 1000 * 60 * 10,
+    enabled: !!maPhim, 
   })
 }
 

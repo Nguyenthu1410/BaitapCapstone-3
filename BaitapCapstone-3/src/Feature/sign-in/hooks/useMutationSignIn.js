@@ -11,7 +11,25 @@ export const useMutationSignIn = () => {
     const dispatch = useDispatch()
 
     return useMutation({
-        mutationFn: (payload) => userService.dangNhap(payload),
+        mutationFn: (payload) => {
+            // Mock admin account for testing
+            if (payload.taiKhoan === 'admin123' && payload.matKhau === 'admin123') {
+                console.log('Mock admin login')
+                return Promise.resolve({
+                    data: {
+                        content: {
+                            taiKhoan: 'admin123',
+                            hoTen: 'Admin Movie',
+                            email: 'admin@movie.com',
+                            soDt: '0123456789',
+                            maLoaiNguoiDung: 'QuanTri',
+                            accessToken: 'mock-admin-token-' + Date.now()
+                        }
+                    }
+                })
+            }
+            return userService.dangNhap(payload)
+        },
         onSuccess(ressponse) {
             toast.success('Đăng nhập thành công')
 
@@ -31,7 +49,7 @@ export const useMutationSignIn = () => {
 
         },
         onError(error) {
-            toast.error(error.response.data.content)
+            toast.error(error.response?.data?.content || 'Đăng nhập thất bại')
         },
     })
 }

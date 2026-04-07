@@ -92,6 +92,7 @@ const RegisterPage = () => {
               return <Input {...field} />;
             }}
           />
+          <p className="text-red-500 text-xs">{errors.soDt?.message}</p>
         </div>
 
         <div>
@@ -104,6 +105,15 @@ const RegisterPage = () => {
             }}
           />
         </div>
+
+        <Controller
+          control={control}
+          name="maLoaiNguoiDung"
+          defaultValue="QuanTri"
+          render={({ field }) => {
+            return <input type="hidden" {...field} />;
+          }}
+        />
 
         <Button
           className="w-full"

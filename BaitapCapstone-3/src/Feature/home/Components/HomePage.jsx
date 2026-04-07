@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router";
-import { PUBLIC_PATH } from "../../../Constant/path";
+import { PUBLIC_PATH } from "../../../constant/path";
+import { useMovieList } from "../../../Movie/hooks/useMovies";
+import { Skeleton } from "antd";
 
 const highlights = [
   {
@@ -33,6 +35,7 @@ const trendingMovies = [
 ];
 
 const HomePage = () => {
+  const { data: movies = [], isLoading, isError } = useMovieList();
   return (
     <div className="space-y-16 pb-10">
       <section className="rounded-3xl bg-slate-900 text-white overflow-hidden shadow-2xl">
@@ -119,17 +122,54 @@ const HomePage = () => {
           </div>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {trendingMovies.map((movie) => (
-              <div key={movie.title} className="rounded-3xl bg-slate-800 p-6 shadow-xl transition hover:-translate-y-1">
-                <div className="h-48 rounded-3xl bg-orange-500 p-4 text-white shadow-inner">
-                  <div className="flex h-full items-end justify-start">
-                    <span className="text-xs uppercase tracking-[0.24em] text-orange-100/80">{movie.category}</span>
+            {isLoading ? (
+              Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="rounded-3xl bg-slate-800 p-6 shadow-xl">
+                  <Skeleton.Image active className="h-48 rounded-3xl" />
+                  <Skeleton active paragraph={{ rows: 2 }} className="mt-5" />
+                </div>
+              ))
+            ) : isError ? (
+              <div className="col-span-full text-center py-12">
+                <p className="text-red-400 font-semibold">Không thể tải danh sách phim</p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="mt-4 inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+                >
+                  Thử lại
+                </button>
+              </div>
+            ) : (
+              movies.slice(0, 6).map((movie) => (
+                <div key={movie.maPhim} className="rounded-3xl bg-slate-800 p-6 shadow-xl transition hover:-translate-y-1">
+                  <div className="h-48 rounded-3xl bg-orange-500 p-4 text-white shadow-inner overflow-hidden">
+                    <img
+                      src={movie.hinhAnh}
+                      alt={movie.tenPhim}
+                      className="w-full h-full object-cover rounded-3xl"
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/300x200?text=NoImage'
+                      }}
+                    />
+                  </div>
+                  <h3 className="mt-5 text-xl font-semibold">{movie.tenPhim}</h3>
+                  <p className="mt-3 text-slate-400">
+                    {movie.moTa.length > 100 ? `${movie.moTa.substring(0, 100)}...` : movie.moTa}
+                  </p>
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="text-sm text-orange-400 font-medium">
+                      ⭐ {movie.danhGia}/10
+                    </span>
+                    <Link
+                      to={`/movie/${movie.maPhim}`}
+                      className="text-sm text-orange-300 hover:text-orange-200 font-medium"
+                    >
+                      Chi tiết →
+                    </Link>
                   </div>
                 </div>
-                <h3 className="mt-5 text-xl font-semibold">{movie.title}</h3>
-                <p className="mt-3 text-slate-400">Cập nhật lịch chiếu, rạp và đánh giá sớm cho bộ phim này.</p>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </section>

@@ -21,3 +21,4 @@ export const PRIVATE_PATH = {
     PROFILE: '/profile',
     BOOKING: '/dat-ve',
 }
+

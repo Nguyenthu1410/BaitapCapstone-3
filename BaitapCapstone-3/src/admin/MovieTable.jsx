@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MovieTable = ({ movies, onEdit, onDelete }) => {
+const MovieTable = ({ movies, onEdit, onDelete, onCreateSchedule }) => {
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
       <table className="min-w-full divide-y divide-gray-200">
@@ -57,6 +57,12 @@ const MovieTable = ({ movies, onEdit, onDelete }) => {
                   className="text-blue-600 hover:text-blue-900 font-semibold"
                 >
                   Sửa
+                </button>
+                <button
+                  onClick={() => onCreateSchedule(movie)}
+                  className="text-green-600 hover:text-green-900 font-semibold"
+                >
+                  Lịch chiếu
                 </button>
                 <button
                   onClick={() => onDelete(movie.maPhim)}

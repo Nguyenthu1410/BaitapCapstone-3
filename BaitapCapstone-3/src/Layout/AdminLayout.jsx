@@ -1,9 +1,8 @@
 import React from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router'
-import { PRIVATE_PATH } from '../Constant/path'
 import { APP_CONFIG } from '../Config/appConfig'
-import { PUBLIC_PATH } from '../Constant/path'
-import { LOCAL_STORAGE_KEYS } from '../Constant/localStorageKeys'
+import { PUBLIC_PATH } from '../constant/path'
+import { LOCAL_STORAGE_KEYS } from '../constant'
 
 const AdminLayout = () => {
   const navigate = useNavigate()

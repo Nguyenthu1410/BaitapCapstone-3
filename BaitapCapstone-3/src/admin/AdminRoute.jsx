@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { Navigate } from "react-router"
-import { PRIVATE_PATH, PUBLIC_PATH } from "../Constant/path"
+import { PRIVATE_PATH, PUBLIC_PATH } from "../constant/path"
 
 
 const AdminRoute = ({children}) => {

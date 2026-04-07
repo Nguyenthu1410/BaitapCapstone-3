@@ -1,6 +1,6 @@
 import { Navigate } from "react-router"
-import { PUBLIC_PATH } from "../Constant/path"
-import { LOCAL_STORAGE_KEYS } from "../Constant/localStorageKeys"
+import { PUBLIC_PATH } from "../constant/path"
+import { LOCAL_STORAGE_KEYS } from "../constant"
 
 
 const ProtectedRoute = ({ children }) => {

@@ -30,15 +30,13 @@ export const MainLayout = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden">
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="overflow-auto grow flex-1">
-        <main className="container mx-auto py-5 h-full">
-          {routeRender()}
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
+      <main className="flex-1 container mx-auto py-5">
+        {routeRender()}
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   );
 };
